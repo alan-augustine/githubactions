@@ -1,0 +1,33 @@
+name: Deploy Project
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm test
+  # deploy job runs on a different machine/github-runner
+  # hence need to re-do some steps in previous job      
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci 
+      - name: Build Project
+        run: npm buid
+      - name: Deploy
+        run: echo "Deploying"
