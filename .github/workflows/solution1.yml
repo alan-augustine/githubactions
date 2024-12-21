@@ -1,4 +1,4 @@
-name: Problem Solution
+name: Problem Solution workflow 1 lint test build
 on: push
 jobs:
   test:
